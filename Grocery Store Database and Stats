@@ -1,0 +1,36 @@
+-- Create a grocery store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, quantity INTEGER, section TEXT, price INTEGER);
+
+INSERT INTO store VALUES
+(1, "Apples", 73, "Produce", 2.30),
+(2, "Bananas", 30, "Produce", 1.23),
+(3, "Oranges", 40, "Produce", 1.50),
+(4, "Pears", 15, "Produce", 1.87),
+(5, "Peaches", 48, "Produce", 1.97),
+(6, "Grapes", 78, "Produce", 1.56),
+(7, "Carrots", 100, "Produce", 1.01),
+(8, "Peas", 350, "Produce", .89),
+(9, "Corn", 170, "Produce", .46),
+(10, "Peanuts", 38,"Snacks", 4.20),
+(11, "Lay's Chips", 290, "Snacks", 3.74),
+(12, "Oreos", 78, "Desserts", 2.99),
+(13, "Cheez-it's", 380, "Snacks", 2.99),
+(14, "Suger Cookies", 98, "Desserts", 1.70),
+(15, "Poptarts", 38, "Desserts", 3.78);
+
+-- display the database ordered by price.
+SELECT * FROM store
+ORDER BY price asc;
+
+-- what is the average price of items in the Produce section?
+SELECT AVG(price) "avg produce item price"
+FROM store
+WHERE section= 'Produce';
+
+-- what are the 5 items with the lowest stock?
+
+SELECT item, quantity
+FROM store
+ORDER BY quantity asc
+LIMIT 5;

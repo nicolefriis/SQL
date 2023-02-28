@@ -1,0 +1,53 @@
+-- Created a table of the top 10 athletes in 2016
+
+CREATE TABLE Athletes ( id INTEGER PRIMARY KEY, fullname TEXT, age INTEGER, Sport TEXT);
+
+INSERT INTO Athletes VALUES (1, "Cristiano Ronaldo", 31, "Soccer");
+INSERT INTO Athletes VALUES (2, "LeBron James", 31, "Basketball" );
+INSERT INTO Athletes VALUES (3, "Lionel Messi", 29, "Soccer");
+INSERT INTO Athletes VALUES (4, "Neymar Jr", 24, "Soccer");
+INSERT INTO Athletes VALUES (5, "Roger Federer", 35, "Tennis");
+INSERT INTO Athletes VALUES (6, "Kevin Durant", 28, "Basketball");
+INSERT INTO Athletes VALUES (7, "Tiger Woods", 41, "Golf");
+INSERT INTO Athletes VALUES (8, "James Rodriguez", 25, "Soccer");
+INSERT INTO Athletes VALUES (9, "Rafael Nadal", 30, "Tennis");
+INSERT INTO Athletes VALUES (10, "Kobe Bryant", 37, "Basketball");
+
+-- Create a table of the top 10 athletes populatity in 2016 (all Numbers are in Millions)
+
+CREATE TABLE Popularity (Athlete_id INTEGER PRIMARY KEY, Salary INTEGER, Endorsements INTEGER, Twitter_Followers INTEGER);
+
+INSERT INTO Popularity VALUES (1, 52.2, 27, 42.1);
+INSERT INTO Popularity VALUES (2, 23, 44, 31.2);
+INSERT INTO Popularity VALUES (3, 48.5, 22, NULL);
+INSERT INTO Popularity VALUES (4, 14.7, 17, 21.9);
+INSERT INTO Popularity VALUES (5, 9, 58, 4.8);
+INSERT INTO Popularity VALUES (6, 20.2, 35, 13.6);
+INSERT INTO Popularity VALUES (7, 1, 50, 5.8);
+INSERT INTO Popularity VALUES (8, 24.1, 4.5, 9.7);
+INSERT INTO Popularity VALUES (9, 4.5, 28, 9.4);
+INSERT INTO Popularity VALUES (10, 25, 26, 9.4);
+
+-- Which Athletes make the most money and what sport do they play?
+
+SELECT Athletes.fullname, Athletes.Sport, Popularity.Salary
+FROM Athletes 
+JOIN Popularity
+ON Athletes.id = Popularity.Athlete_id
+ORDER BY Salary desc;
+
+-- How Much of the top 10 Athletes Income comes from Salary vs Endorsements 
+
+SELECT Athletes.fullname, Popularity.Salary, Popularity.Endorsements
+FROM Athletes
+JOIN Popularity
+ON Athletes.id = Popularity.Athlete_id
+ORDER BY Endorsements desc;
+
+-- How does an Athletes age relate to the number of Twitter followers they have?
+
+SELECT Athletes.fullname, Athletes.age, Popularity.Twitter_Followers
+FROM Athletes
+JOIN Popularity
+ON Athletes.id = Popularity.Athlete_id
+ORDER BY Twitter_Followers desc;

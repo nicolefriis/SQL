@@ -1,0 +1,43 @@
+
+
+SELECT track_name, artist_name, popularity
+FROM SpotifyData
+ORDER BY popularity DESC
+LIMIT 10;
+
+-- Determined the avg popularity and energy by artist and track.
+
+SELECT artist_name, avg(popularity) as popularity, avg(energy) as energy
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY popularity DESC;
+
+-- Determine the most Dancable artist.
+
+SELECT artist_name
+FROM SpotifyData
+GROUP BY artist_name
+ORDER BY danceability;
+
+-- Determine the 10 longest tracks in the top 50 and who they were sung by.
+
+SELECT artist_name, track_name, duration_ms
+FROM SpotifyData
+ORDER BY duration_ms DESC
+LIMIT 10;
+
+-- Determine how the top 15 most popular tracks/artist compare to the average loudness of the top 50.
+
+SELECT Avg(loudness)
+FROM SpotifyData;
+
+SELECT artist_name,track_name, loudness,
+CASE 
+    WHEN loudness > (SELECT Avg(loudness) FROM SpotifyData) THEN 'Above Average'
+    WHEN loudness = (SELECT Avg(loudness) FROM SpotifyData) THEN 'Average'
+    WHEN loudness < (SELECT Avg(loudness) FROM SpotifyData) THEN 'Below Average'
+    END AS ComparisonAverage
+FROM SpotifyData
+ORDER BY popularity DESC
+LIMIT 15;
+

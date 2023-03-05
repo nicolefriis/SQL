@@ -1,0 +1,52 @@
+--How many orders were placed in January?
+
+SELECT COUNT(orderID)
+FROM JanSales
+WHERE length(orderID)= 6
+AND orderID <> 'orderID';
+
+How many of those orders were for an iPhone?
+
+SELECT COUNT(orderID)
+FROM JanSales
+WHERE Product='iPhone';
+
+Select the customer account numbers for all the orders that were placed in February.
+
+SELECT DISTINCT c.acctnum 
+FROM customers as c
+INNER JOIN FebSales as Feb
+ON c.order_id = Feb.orderID
+WHERE length(order_id) = 6
+AND order_id <> 'orderID';
+
+Which product was the cheapest one sold in January, and what was the price?
+
+SELECT DISTINCT Product, price
+FROM JanSales
+ORDER BY price ASC
+LIMIT 1;
+
+What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
+
+SELECT SUM(Quantity)*price as revenue, Product
+FROM JanSales
+GROUP BY Product;
+
+Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+
+SELECT Product, SUM(Quantity), SUM(Quantity)*price as revenue
+FROM FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product;
+
+How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+
+SELECT COUNT(DISTINCT c.acctnum), Avg(Quantity*price)
+FROM FebSales as Feb
+LEFT JOIN customers as c
+ON Feb.orderID=c.order_id
+WHERE Feb.Quantity>2
+AND length(order_id)=6
+AND orderid <> 'ORDER ID';
+

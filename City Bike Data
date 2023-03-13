@@ -1,6 +1,6 @@
 -- From a database with City Bike Lanes information including year installed, year updated, street, width (in feet), safety rating, and proteced.
 
-Use a CTE to show the names of every bike lane that has an average safety rating of at least 4.0 (and with an added label of "Safe Lane")
+-- Use a CTE to show the names of every bike lane that has an average safety rating of at least 4.0 (and with an added label of "Safe Lane")
 
 WITH safety_average_cte AS (
 SELECT street, AVG(safetyrating) as 'rating'
